@@ -140,7 +140,7 @@ services:
   es-client-2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2   
+    image: ikuturso/es-image:3.2
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -717,20 +717,20 @@ services:
         }
     stdin_open: true
     tty: true
+    ports:
+    - 80:80/tcp
+    - 443:443/tcp
     depends_on:
       - siemonster
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label: capricorn=1
-    ports:
-    - 80:80/tcp
-    - 443:443/tcp
   '411':
     labels:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1,makara=1
       io.rancher.sidekicks: mysqldb
-    image: ikuturso/411:
+    image: ikuturso/411:3.3
     environment:
     - "MYSQL_DATABASE=${MYSQL_DATABASE}"
     - "MYSQL_USER=${MYSQL_USER}"
