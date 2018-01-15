@@ -140,9 +140,7 @@ services:
   es-client-2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:
-    
-    
+    image: ikuturso/es-image:3.2   
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
