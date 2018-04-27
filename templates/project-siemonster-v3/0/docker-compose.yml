@@ -44,7 +44,7 @@ services:
     image: redis
     restart: always
   elastalert:
-    image: ikuturso/elastalert:v3
+    image: ikuturso/elastalert
     environment:
       ELASTICSEARCH_USER: elastic
       ELASTIC_PWD: ${ELASTIC_PWD}
@@ -95,7 +95,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
   minemeld:
-    image: ikuturso/minemeld:1.0
+    image: ikuturso/minemeld
     stdin_open: true
     tty: true
     tmpfs: /run
@@ -114,7 +114,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: tiamat=1
   grafana:
-    image: ikuturso/grafana:4.5.2
+    image: ikuturso/grafana
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
       GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
@@ -140,7 +140,7 @@ services:
   es-client-2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2
+    image: ikuturso/es-image
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -172,7 +172,7 @@ services:
   es-data-node1:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2
+    image: ikuturso/es-image
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -202,7 +202,7 @@ services:
   es-client-1:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2
+    image: ikuturso/es-image
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -234,7 +234,7 @@ services:
   es-master:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2
+    image: ikuturso/es-image
     hostname: es-master
     environment:
       BEATS_PWD: ${BEATS_PWD}
@@ -278,7 +278,7 @@ services:
   es-data-node2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image:3.2
+    image: ikuturso/es-image
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -384,7 +384,7 @@ services:
     depends_on:
       - wazuh
     entrypoint: sh wait-for-it.sh es-master
-    image: ikuturso/wazuh-kibana:1.7
+    image: ikuturso/wazuh-kibana
   logstash-collector-exporter:
     image: bonniernews/logstash_exporter
     links:
@@ -731,7 +731,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1,makara=1
       io.rancher.sidekicks: mysqldb
-    image: ikuturso/411:3.3
+    image: ikuturso/411
     environment:
     - "MYSQL_DATABASE=${MYSQL_DATABASE}"
     - "MYSQL_USER=${MYSQL_USER}"
@@ -756,7 +756,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.scheduler.affinity:host_label_soft_ne: kraken=1,tiamat=1
   logstash-indexer:
-    image: ikuturso/logstash-indexer:1.0
+    image: ikuturso/logstash-indexer
     environment:
       HEAP_SIZE: "1g"
       ELASTICSEARCH_HOST: "es-client-1"
@@ -777,7 +777,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.service.wait_for_healthcheck: true
   logstash-collector:
-    image: ikuturso/logstash-collector:1.4
+    image: ikuturso/logstash-collector
     environment:
       HEAP_SIZE: "1g"
       RABBITMQ_USER: ${RABBITMQ_USER}
@@ -803,7 +803,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.service.wait_for_healthcheck: true
   wazuh:
-    image: ikuturso/wazuh:1.0
+    image: ikuturso/wazuh
     hostname: wazuh-manager
     restart: always
     environment:
@@ -835,7 +835,7 @@ services:
     - 514:514
     - 1516:1516/udp
     - 1516:1516
-    image: ikuturso/syslog-ng:1.0
+    image: ikuturso/syslog-ng
   rabbitmq:
     image: ikuturso/rabbitmq
     stdin_open: true
@@ -856,7 +856,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
   reporting:
-    image: ikuturso/reporting:5.5.2
+    image: ikuturso/reporting
     stdin_open: true
     tty: true
     environment:
