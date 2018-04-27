@@ -44,7 +44,7 @@ services:
     image: redis
     restart: always
   elastalert:
-    image: ikuturso/elastalert
+    image: ikuturso/elastalert:v3
     environment:
       ELASTICSEARCH_USER: elastic
       ELASTIC_PWD: ${ELASTIC_PWD}
@@ -95,7 +95,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
   minemeld:
-    image: ikuturso/minemeld
+    image: ikuturso/minemeld:1.0
     stdin_open: true
     tty: true
     tmpfs: /run
@@ -114,7 +114,7 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: tiamat=1
   grafana:
-    image: ikuturso/grafana
+    image: ikuturso/grafana:dev
     environment:
       GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
       GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
@@ -140,7 +140,7 @@ services:
   es-client-2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image
+    image: ikuturso/es-image:6.2.21
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -172,7 +172,7 @@ services:
   es-data-node1:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image
+    image: ikuturso/es-image:6.2.21
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -202,7 +202,7 @@ services:
   es-client-1:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image
+    image: ikuturso/es-image:6.2.21
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -234,7 +234,7 @@ services:
   es-master:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image
+    image: ikuturso/es-image:6.2.21
     hostname: es-master
     environment:
       BEATS_PWD: ${BEATS_PWD}
@@ -278,7 +278,7 @@ services:
   es-data-node2:
     cap_add:
     - IPC_LOCK
-    image: ikuturso/es-image
+    image: ikuturso/es-image:6.2.21
     environment:
       CA_PWD: ${CA_PWD}
       CLUSTER_NAME: siemonster
@@ -306,7 +306,7 @@ services:
       io.rancher.sidekicks: es-data-node2-volume
       io.rancher.container.hostname_override: container_name
   siemonster:
-    image: ikuturso/siemapp:beta
+    image: ikuturso/siemapp:prm
     stdin_open: true
     tty: true
     environment:
@@ -444,7 +444,7 @@ services:
   prometheus:
     image: ikuturso/prometheus
     volumes:
-    - prometheus_data:/prometheus
+    - prometheus_data:/prometheus:2.2
     - prometheus_rules:/etc/prometheus
     ports:
     - 9090:9090/tcp
@@ -777,7 +777,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.service.wait_for_healthcheck: true
   logstash-collector:
-    image: ikuturso/logstash-collector
+    image: ikuturso/logstash-collector:6.2.2
     environment:
       HEAP_SIZE: "1g"
       RABBITMQ_USER: ${RABBITMQ_USER}
@@ -803,7 +803,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.service.wait_for_healthcheck: true
   wazuh:
-    image: ikuturso/wazuh
+    image: ikuturso/wazuh:3.21
     hostname: wazuh-manager
     restart: always
     environment:
@@ -835,9 +835,9 @@ services:
     - 514:514
     - 1516:1516/udp
     - 1516:1516
-    image: ikuturso/syslog-ng
+    image: ikuturso/syslog-ng:anoat
   rabbitmq:
-    image: ikuturso/rabbitmq
+    image: ikuturso/rabbitmq:ms
     stdin_open: true
     tty: true
     labels:
@@ -856,7 +856,7 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.container.pull_image: always
   reporting:
-    image: ikuturso/reporting
+    image: ikuturso/reporting:5.5.2
     stdin_open: true
     tty: true
     environment:
